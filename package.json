@@ -3,9 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
+    "start-dev": "nodemon ./bin/www",
     "migrate": "node model/database.js",
-    "bot": "node utils/bot.js"
+    "bot": "node utils/bot.js",
+    "heroku-postbuild": "cd client && npm run build && cd../",
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "bootstrap": "^4.5.0",

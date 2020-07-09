@@ -1,0 +1,18 @@
+/* Media query for narrow browsers */
+@media (max-width: 960px) {
+  .card {
+    width: 70%;
+  }
+}
+/* Media query for tablet */
+@media (max-width: 768px) {
+  .card {
+    width: 80%;
+  }
+}
+/* Media query for smart-phones (568 normally but I'm going to go larger just in case)*/
+@media (max-width: 630px) {
+  .card {
+    width: 90%;
+  }
+}

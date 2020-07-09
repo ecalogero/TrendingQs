@@ -73,6 +73,8 @@ https://images.app.goo.gl/HXe1khH99anXBPUC8
 .splice(5,12)// used to remove a specified amount of a string from a particular location.
 .trim()//removes white space from around a string. Not safe for IE 7 or earlier. Can use replace with regex instead 
 .includes("str")//returns true if the str arcgument is in the given string. Otherwiss return false. 
+.match()
+
 
 REGEX
 Explainer article
@@ -99,4 +101,5 @@ ALTER TABLE table_name
 DROP FOREIGN KEY constraint_name;
 
 INSERT INTO questions (type_id, assessment_id, text, date, twurl, quiz_id) VALUES (1, 1, "Is this a question?", "2020-05-21 01:27:41", "http://www.twitter.com/avinash/status/1263256807138459600","test");
- 
+
+ ALTER TABLE students ADD FOREIGN KEY REFERENCES fk_course(course_id) course(id) ON DELETE CASCADE;

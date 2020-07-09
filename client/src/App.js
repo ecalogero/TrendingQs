@@ -48,8 +48,7 @@ class App extends Component {
   };
   //rating handler in the quiz
   handleRating = (e) => {
-    let { value } = this.state.rating;
-    this.setState({ value: e.target.value });
+    this.setState({ rating: {value: e.target.value} });
   };
   //fetch request for the questions in the quiz
   //need to debug the access to the nested objects and the way of increenting count
@@ -59,6 +58,7 @@ class App extends Component {
     fetch(request)
       .then((response) => response.json())
       .then((response) => {
+        console.log("response: ", response);
         this.setState({ questions: response });
         console.log(this.state.questions);
         this.setState({
@@ -118,8 +118,12 @@ fetch("http://localhost:5000/questions/?n=5", requestOptions)
         }: answers: ${answers}, rating: ${ratings}`
       );
       this.setState({
-        answer,
-        rating,
+        answer: {
+          text: ""
+        },
+        rating: {
+          value: 50.0
+        },
         answers,
         ratings,
         text: this.state.questions[count].text,

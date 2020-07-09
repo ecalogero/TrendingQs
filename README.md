@@ -14,7 +14,7 @@ https://app.dbdesigner.net/designer/schema/330364
 ### Dependencies
 
 - Run `npm install` in project directory. This will install server-related dependencies such as `express`.
-- `cd client` and run `npm install`. This will install client dependencies (React). Also you need to run `npm install twit` to install the Twitter library for the Twitter API calls. Also you need to run `npm install react-bootstrap bootstrap` and `npm install styled-components` for some elements that I've used in the fromt end.
+- `cd client` and run `npm install`. This will install client dependencies (React). Also you need to run `npm install twit` to install the Twitter library for the Twitter API calls. Also you need to run `npm install react-bootstrap bootstrap` and `npm install styled-components` for some elements that I've used in the front end.
 
 ### Database Prep
 
