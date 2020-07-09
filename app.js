@@ -18,11 +18,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "./client/build")));
 
-//wildcard routing
-app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./client/build", "index.html"))
-})
-
 app.use("/", indexRouter);
 //use the router created to fetch the questions
 app.use("/questions", questionsRouter);
@@ -32,6 +27,11 @@ app.use("/answers", answersRouter);
 app.use("/ratings", ratingsRouter);
 //use the router created to fetch the quizzes
 app.use("/quizzes", quizzesRouter);
+
+//wildcard routing
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

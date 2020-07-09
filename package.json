@@ -6,7 +6,8 @@
     "start-dev": "nodemon ./bin/www",
     "migrate": "node model/database.js",
     "bot": "node utils/bot.js",
-    "heroku-postbuild": "cd client && npm run build && cd../",
+    "heroku-postbuild": "cd client && npm install && npm run build",
+    "heroku-postbuild-old": "cd client && npm run build && cd../",
     "start": "node ./bin/www"
   },
   "dependencies": {
