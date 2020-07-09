@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled, { keyframes } from "styled-components";
 import { ReactComponent as EmojiSmile } from "../emoji-smile.svg";
+import { Link } from "react-router-dom";
 
 const StyledSVG = styled(EmojiSmile)`
   display: block;
@@ -15,7 +16,7 @@ class StartCard extends Component {
   }
 
   startGame = () => {
-    this.props.getQuestions();
+    
   };
 
   render() {
@@ -27,10 +28,9 @@ class StartCard extends Component {
             className="card-img-top"
             alt="jellyfish"
           />
-          <StyledSVG />
-          <button className="btn btn-primary" onClick={this.startGame}>
+          <Link className="btn btn-primary" to="/gamecard">
             Start
-          </button>
+          </Link>
         </div>
       </div>
     );

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled, { keyframes } from "styled-components";
 import { ReactComponent as EmojiSmile } from "../emoji-smile.svg";
+import { Link } from "react-router-dom";
 
 const StyledSVG = styled(EmojiSmile)`
   display: block;
@@ -17,9 +18,6 @@ class EndCard extends Component {
       answer: this.props.answer,
     };
   }
-  startGame = () => {
-    this.props.getQuestions();
-  };
 
   render() {
     return (
@@ -35,16 +33,15 @@ class EndCard extends Component {
             <p className="card-text">You have completed the quiz..</p>
           </div>
           <div className="card-body">
-            <StyledSVG />
             <button
               className="btn btn-outline"
               onClick={this.props.gotoTwitter}
             >
               Share on Twitter
             </button>
-            <button className="btn btn-primary" onClick={this.startGame}>
+            <Link className="btn btn-primary" to="/gamecard">
               Take another quiz
-            </button>
+            </Link>
           </div>
         </div>
       </div>

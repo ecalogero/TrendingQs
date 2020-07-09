@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import styled, { keyframes } from "styled-components";
-import { ReactComponent as EmojiSmile } from "../emoji-smile.svg";
+// import styled, { keyframes } from "styled-components";
+// import { ReactComponent as EmojiSmile } from "../emoji-smile.svg";
 
-const StyledSVG = styled(EmojiSmile)`
-  display: block;
-  margin: auto;
-  width: 2em;
-  height: 2em;
-`;
+// const StyledSVG = styled(EmojiSmile)`
+//   display: block;
+//   margin: auto;
+//   width: 2em;
+//   height: 2em;
+// `;
 
 class GameCard extends Component {
   constructor(props) {
@@ -63,7 +63,6 @@ class GameCard extends Component {
             </li>
           </ul>
           <div className="card-body">
-            <StyledSVG />
             <button
               className="btn btn-outline"
               onClick={this.props.gotoTwitter}

@@ -6,7 +6,7 @@ import EndCard from "./components/EndCard";
 import InitModal from "./components/InitModal";
 import SurveyNavBar from "./components/SurveyNavBar";
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Switch, Route, Link } from "react-router-dom";
 
 class App extends Component {
   constructor(props) {
@@ -101,6 +101,7 @@ fetch("http://localhost:5000/questions/?n=5", requestOptions)
         complete: true,
       });
       console.log("End of Quiz!");
+      window.location = "/endgame";
       return;
     } else {
       count++;
@@ -160,46 +161,57 @@ fetch("http://localhost:5000/questions/?n=5", requestOptions)
 
   render() {
     return (
-      <Router>
-        <div className="App">
-          <SurveyNavBar handleshow={this.handleshow}></SurveyNavBar>
-          <InitModal
-            show={this.state.show}
-            handleClose={this.handleClose}
-            handleInput={this.handleInput}
-            getQuestions={this.getQuestions}
-          ></InitModal>
-          <br></br>
-          <br></br>
-          <Switch>
-            <Route path="/startcard">
-              <StartCard getQuestions={this.props.getQuestions}></StartCard>
-            </Route>
-            <Route path="/gamecard">
-              <GameCard
-                handleNext={this.handleNext}
-                gotoTwitter={this.gotoTwitter}
-                handleInput={this.handleInput}
-                handleAnswer={this.handleAnswer}
-                handleRating={this.handleRating}
-                rating={this.state.rating}
-                answer={this.state.answer}
-                text={this.state.text}
-                count={this.state.count}
-              ></GameCard>
-            </Route>
-            <Route path="/endcard">
-              <EndCard
-                getQuestions={this.props.getQuestions}
-                gotoTwitter={this.props.shareOnTwitter}
-              ></EndCard>
-            </Route>
-            <Route path="/">
-              <StartCard getQuestions={this.props.getQuestions}></StartCard>
-            </Route>
-          </Switch>
-        </div>
-      </Router>
+      <div className="App">
+        <SurveyNavBar handleshow={this.handleshow}></SurveyNavBar>
+        <InitModal
+          show={this.state.show}
+          handleClose={this.handleClose}
+          handleInput={this.handleInput}
+          getQuestions={this.getQuestions}
+        ></InitModal>
+        <br></br>
+        <br></br>
+        <Switch>
+          <Route
+            path="/gamecard"
+            render={(props) => {
+              return (
+                <GameCard
+                  {...props}
+                  handleNext={this.handleNext}
+                  gotoTwitter={this.gotoTwitter}
+                  handleInput={this.handleInput}
+                  handleAnswer={this.handleAnswer}
+                  handleRating={this.handleRating}
+                  rating={this.state.rating}
+                  answer={this.state.answer}
+                  text={this.state.text}
+                  count={this.state.count}
+                />
+              );
+            }}
+          />
+          <Route
+            path="/endgame"
+            render={(props) => {
+              return (
+                <EndCard
+                  {...props}
+                  getQuestions={this.props.getQuestions}
+                  gotoTwitter={this.props.shareOnTwitter}
+                />
+              );
+            }}
+          />
+          <Route
+            path="/"
+            render={(props) => {
+              return <StartCard {...props} />;
+            }}
+            exact
+          />
+        </Switch>
+      </div>
     );
   }
 }

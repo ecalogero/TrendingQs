@@ -49,7 +49,7 @@ class InitModal extends Component {
           <Button variant="secondary" onClick={this.props.handleClose}>
             Quit
           </Button>
-          <Button variant="primary" onClick={() => this.props.getQuestions()}>
+          <Button variant="primary" onClick={this.props.getQuestions}>
             Start
           </Button>
         </Modal.Footer>
