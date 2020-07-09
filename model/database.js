@@ -21,15 +21,15 @@ con.connect(function (err) {
   let sql = `
 
 
-DROP TABLE question_types;
-DROP TABLE answers;
-DROP TABLE quizzes;
-DROP TABLE users;
-DROP TABLE quizzes_questions;
-DROP TABLE multiple_choice_answers;
-DROP TABLE question_answers;
-DROP TABLE scale_ranges;
-DROP TABLE ratings;
+DROP TABLE IF EXISTS question_types;
+DROP TABLE IF EXISTS answers;
+DROP TABLE IF EXISTS quizzes;
+DROP TABLE IF EXISTS  users;
+DROP TABLE IF EXISTS  quizzes_questions;
+DROP TABLE IF EXISTS  multiple_choice_answers;
+DROP TABLE IF EXISTS  question_answers;
+DROP TABLE IF EXISTS  scale_ranges;
+DROP TABLE IF EXISTS  ratings;
 
 
 CREATE TABLE questions (
