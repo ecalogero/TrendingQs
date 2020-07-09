@@ -21,7 +21,7 @@ class GameCard extends Component {
   render() {
     return (
       <div className="App container text-center d-flex justify-content-center">
-        <div className="card w-70">
+        <div className="card w-100">
           <img
             src="https://cdn-a.william-reed.com/var/wrbm_gb_food_pharma/storage/images/publications/food-beverage-nutrition/foodnavigator.com/news/market-trends/jellyfish-a-new-sustainable-nutritious-and-oyster-like-food-for-the-western-world/9974704-1-eng-GB/Jellyfish-A-new-sustainable-nutritious-and-oyster-like-food-for-the-Western-world_wrbm_large.jpg"
             className="card-img-top"
