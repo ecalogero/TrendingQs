@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import GameCard from "./components/GameCard";
+import StartCard from "./components/StartCard";
+import EndCard from "./components/EndCard";
 import InitModal from "./components/InitModal";
 import SurveyNavBar from "./components/SurveyNavBar";
 import "./App.css";
-
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 class App extends Component {
@@ -48,7 +49,7 @@ class App extends Component {
   };
   //rating handler in the quiz
   handleRating = (e) => {
-    this.setState({ rating: {value: e.target.value} });
+    this.setState({ rating: { value: e.target.value } });
   };
   //fetch request for the questions in the quiz
   //need to debug the access to the nested objects and the way of increenting count
@@ -119,10 +120,10 @@ fetch("http://localhost:5000/questions/?n=5", requestOptions)
       );
       this.setState({
         answer: {
-          text: ""
+          text: "",
         },
         rating: {
-          value: 50.0
+          value: 50.0,
         },
         answers,
         ratings,
@@ -154,6 +155,8 @@ fetch("http://localhost:5000/questions/?n=5", requestOptions)
   };
   //open new browsing tab to twurl
   gotoTwitter = () => {};
+  //share your answers to twitter
+  shareOnTwitter = () => {};
 
   render() {
     return (
@@ -168,18 +171,33 @@ fetch("http://localhost:5000/questions/?n=5", requestOptions)
           ></InitModal>
           <br></br>
           <br></br>
-
-          <GameCard
-            handleNext={this.handleNext}
-            gotoTwitter={this.gotoTwitter}
-            handleInput={this.handleInput}
-            handleAnswer={this.handleAnswer}
-            handleRating={this.handleRating}
-            rating={this.state.rating}
-            answer={this.state.answer}
-            text={this.state.text}
-            count={this.state.count}
-          ></GameCard>
+          <Switch>
+            <Route path="/startcard">
+              <StartCard getQuestions={this.props.getQuestions}></StartCard>
+            </Route>
+            <Route path="/gamecard">
+              <GameCard
+                handleNext={this.handleNext}
+                gotoTwitter={this.gotoTwitter}
+                handleInput={this.handleInput}
+                handleAnswer={this.handleAnswer}
+                handleRating={this.handleRating}
+                rating={this.state.rating}
+                answer={this.state.answer}
+                text={this.state.text}
+                count={this.state.count}
+              ></GameCard>
+            </Route>
+            <Route path="/endcard">
+              <EndCard
+                getQuestions={this.props.getQuestions}
+                gotoTwitter={this.props.shareOnTwitter}
+              ></EndCard>
+            </Route>
+            <Route path="/">
+              <StartCard getQuestions={this.props.getQuestions}></StartCard>
+            </Route>
+          </Switch>
         </div>
       </Router>
     );
