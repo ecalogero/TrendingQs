@@ -89,7 +89,7 @@ fetch("http://localhost:5000/questions/?n=5", requestOptions)
   };
   //handler to move onto the next question
   handleNext = () => {
-    let { answer, rating, count, ratings, answers, questions } = this.state;
+    let { answer, rating, count, ratings, answers } = this.state;
     if (count === this.state.n - 1) {
       //I need to do something else in here
       this.postAnswers();
