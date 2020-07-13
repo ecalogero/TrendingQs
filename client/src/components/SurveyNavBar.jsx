@@ -25,11 +25,6 @@ class SurveyNavBar extends Component {
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
-            <li className="nav-item active">
-              <a className="nav-link" href="#">
-                Home <span className="sr-only">(current)</span>
-              </a>
-            </li>
             <li className="nav-item">
               <a className="nav-link" href="#">
                 Features
@@ -48,9 +43,9 @@ class SurveyNavBar extends Component {
             <li className="nav-item">
               <button
                 className="btn btn-primary"
-                onClick={this.props.handleshow}
+                onClick={this.props.register}
               >
-                New Game
+                Register
               </button>
             </li>
           </ul>

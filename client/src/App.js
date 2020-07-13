@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import GameCard from "./components/GameCard";
 import StartCard from "./components/StartCard";
 import EndCard from "./components/EndCard";
 import InitModal from "./components/InitModal";
 import SurveyNavBar from "./components/SurveyNavBar";
 import "./App.css";
-import { Switch, Route, Link } from "react-router-dom";
+import { Switch, Route, Link, useHistory } from "react-router-dom";
 
 class App extends Component {
   constructor(props) {
@@ -29,8 +28,12 @@ class App extends Component {
       ratings: [],
     };
   }
-  handleshow = () => {
+  register = () => {
+    //put the login in here
+  };
+  handleShow = () => {
     this.setState({ show: true });
+    //maybe add a routing to the GameCard in here?
   };
   handleClose = () => {
     this.setState({ show: false });
@@ -59,9 +62,7 @@ class App extends Component {
     fetch(request)
       .then((response) => response.json())
       .then((response) => {
-        console.log("response: ", response);
         this.setState({ questions: response });
-        console.log(this.state.questions);
         this.setState({
           text: this.state.questions[0].text,
           id: this.state.questions[0].id,
@@ -71,28 +72,14 @@ class App extends Component {
         });
       });
     this.handleClose();
-    //to try later
-    /* var raw = "";
-
-var requestOptions = {
-  method: 'GET',
-  body: raw,
-  redirect: 'follow'
-};
-
-fetch("http://localhost:5000/questions/?n=5", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
-
-  */
   };
   //handler to move onto the next question
   handleNext = () => {
     let { answer, rating, count, ratings, answers } = this.state;
     if (count === this.state.n - 1) {
-      //I need to do something else in here
       this.postAnswers();
+      //re-routes the page to the EndCard component
+      window.location = "/endgame";
       this.setState({
         answers: [],
         ratings: [],
@@ -100,25 +87,24 @@ fetch("http://localhost:5000/questions/?n=5", requestOptions)
         count: 0,
         complete: true,
       });
-      console.log("End of Quiz!");
-      window.location = "/endgame";
+      //This is the end of the quiz.
       return;
     } else {
       count++;
       answer = { ...this.state.answer, qid: this.state.id };
       rating = { ...this.state.rating, qid: this.state.id };
-      console.log(
-        `These are the values to be stored for question ${
-          count + 1
-        }: answer: ${answer}, rating: ${rating}`
-      );
+      // console.log(
+      //   `These are the values to be stored for question ${
+      //     count + 1
+      //   }: answer: ${answer}, rating: ${rating}`
+      // );
       answers = [...this.state.answers, answer];
       ratings = [...this.state.ratings, rating];
-      console.log(
-        `These are the values to be stored in the arrays for question ${
-          count + 1
-        }: answers: ${answers}, rating: ${ratings}`
-      );
+      // console.log(
+      //   `These are the values to be stored in the arrays for question ${
+      //     count + 1
+      //   }: answers: ${answers}, rating: ${ratings}`
+      // );
       this.setState({
         answer: {
           text: "",
@@ -145,7 +131,7 @@ fetch("http://localhost:5000/questions/?n=5", requestOptions)
     ratings = [...this.state.ratings, rating];
 
     let body = JSON.stringify({ answers, ratings, questions, qname, userid });
-    console.log("Here's the body: ", body);
+    // console.log("Here's the body: ", body);
     fetch(`/quizzes`, {
       method: "POST",
       headers: {
@@ -162,7 +148,7 @@ fetch("http://localhost:5000/questions/?n=5", requestOptions)
   render() {
     return (
       <div className="App">
-        <SurveyNavBar handleshow={this.handleshow}></SurveyNavBar>
+        <SurveyNavBar register={this.register}></SurveyNavBar>
         <InitModal
           show={this.state.show}
           handleClose={this.handleClose}
@@ -197,8 +183,8 @@ fetch("http://localhost:5000/questions/?n=5", requestOptions)
               return (
                 <EndCard
                   {...props}
-                  getQuestions={this.props.getQuestions}
-                  gotoTwitter={this.props.shareOnTwitter}
+                  gotoTwitter={this.shareOnTwitter}
+                  handleShow={this.handleShow}
                 />
               );
             }}
@@ -206,7 +192,7 @@ fetch("http://localhost:5000/questions/?n=5", requestOptions)
           <Route
             path="/"
             render={(props) => {
-              return <StartCard {...props} />;
+              return <StartCard {...props} handleShow={this.handleShow} />;
             }}
             exact
           />
@@ -215,5 +201,4 @@ fetch("http://localhost:5000/questions/?n=5", requestOptions)
     );
   }
 }
-
 export default App;
